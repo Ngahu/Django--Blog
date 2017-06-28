@@ -14,14 +14,22 @@ def post_detail(request):
     """
     :return: the home page
     """
-    return HttpResponse("LOADING DETAIL...")
+    context = {
+        "title": "Detail"
+    }
+    return render(request, "home/index.html", context)
 
 
 def post_list(request):
     """
     :return: the home page
     """
-    return HttpResponse("LIST...")
+    context = {
+        "title":"List"
+    }
+    return render(request,"home/index.html", context)
+
+
 
 def post_update(request):
     """
