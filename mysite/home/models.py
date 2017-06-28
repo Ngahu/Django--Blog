@@ -13,5 +13,9 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now=False,auto_now_add=True)
 
 
+
     def __str__(self):
         return self.title
+
+
+
