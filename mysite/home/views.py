@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from . models import Post
 
@@ -12,12 +12,14 @@ def post_create(request):
 
 def post_detail(request):
     """
-    :return: the home page
+    :return: the detail page
     """
+    instance = get_object_or_404(Post,id=4)
     context = {
-        "title": "Detail"
+        "title": "instance.title",
+        "instance":instance,
     }
-    return render(request, "home/index.html", context)
+    return render(request, "home/post_detail.html", context)
 
 
 def post_list(request):
