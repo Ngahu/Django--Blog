@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
-
+from django.core.urlresolvers import reverse
 class Post(models.Model):
     """
     this is incharge of the post form
@@ -16,6 +15,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        #returning of the dynamic routing
+        return reverse("home:detail",kwargs={"abc":self.id})
 
 
 

@@ -12,10 +12,11 @@
 <div>
 
     {% for obj in object_list %}
-    <h3>{{ obj.title }} </h3> <br>
+    <a href="{%url "home:detail" abc=obj.id %}"> {{ obj.title }}</a> <br>
     {{ obj.content }} <br>
     {{ obj.timestamp }} <br>
     {{ obj.id }} <br>
+
 
 
     {% endfor %}

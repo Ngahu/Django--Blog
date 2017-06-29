@@ -10,11 +10,11 @@ def post_create(request):
 
     return HttpResponse("LOADING...")
 
-def post_detail(request):
+def post_detail(request,abc=None):
     """
     :return: the detail page
     """
-    instance = get_object_or_404(Post,id=4)
+    instance = get_object_or_404(Post,id=abc)
     context = {
         "title": "instance.title",
         "instance":instance,
