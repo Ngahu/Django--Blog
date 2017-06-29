@@ -1,14 +1,22 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
-from . models import Post
 
+from . models import Post
+from. forms import PostForm
 
 def post_create(request):
     """
-    :return: the home page
+    :return: the form create
     """
+    form = PostForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+    context = {
+        "form":form,
 
-    return HttpResponse("LOADING...")
+    }
+    return render(request, "home/post_form.html", context)
 
 def post_detail(request,abc=None):
     """
