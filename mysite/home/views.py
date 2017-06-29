@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from . models import Post
 
 
 def post_create(request):
@@ -21,15 +21,12 @@ def post_detail(request):
 
 
 def post_list(request):
-   if request.user.is_authenticated():
-        context = {
-            "title":"REGISTERED USER List"
-        }
-   else:
-       context = {
-           "title":"List"
-       }
-   return render(request,"home/index.html", context)
+    queryset = Post.objects.all()
+    context = {
+        "object_list":queryset,
+        "title":"List"
+    }
+    return render(request,"home/index.html",context)
 
 
 
