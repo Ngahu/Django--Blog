@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 
 from . models import Post
 from. forms import PostForm
@@ -12,6 +12,7 @@ def post_create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "form":form,
 
@@ -40,11 +41,25 @@ def post_list(request):
 
 
 
-def post_update(request):
-    """
-    :return: the home page
-    """
-    return HttpResponse("UPDATING...")
+def post_update(request,abc=None):
+    instance = get_object_or_404(Post, id=abc)
+    form = PostForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+    context = {
+        "title": "instance.title",
+        "instance": instance,
+        "form":form
+    }
+    return render(request,"home/post_form.html",context)
+
+
+
+
+
+
 
 def post_delete(request):
     """
